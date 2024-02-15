@@ -25,13 +25,13 @@ public class MovieCollection {
         }
         return out;
     }
-    public Movie[] searchCast(String keyWord){
-        Movie[] out;
+    public String[] searchCast(String keyWord){
+        String[] out;
         int matches = 0;
-        String indices = "";
+        String names;
         for(int i =0 ; i<movies.length;i++){
             for(String name : movies[i].getCast()){
-                if
+
             }
         }
         return out;
