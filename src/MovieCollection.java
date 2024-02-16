@@ -9,30 +9,56 @@ public class MovieCollection {
         }
     }
     public Movie[] searchTitles(String keyWord){
+        keyWord = keyWord.toLowerCase();
         Movie[] out;
         int matches = 0;
         String indices = "";
         for(int i = 0 ; i<movies.length;i++){
-            if(movies[i].getTitle().contains(keyWord)){
+            if(movies[i].getTitle().toLowerCase().contains(keyWord)){
                 matches++;
                 indices+=i+" ";
             }
         }
         out = new Movie[matches];
-        for(String s : indices.split(" ")){
-            out[out.length-matches] = movies[Integer.parseInt(s)];
-            matches--;
+        String[] indices0 = indices.split(" ");
+        for(int i = 0; i<matches;i++){
+            out[i] = movies[Integer.parseInt(indices0[i])];
         }
         return out;
     }
     public String[] searchCast(String keyWord){
+        keyWord = keyWord.toLowerCase();
         String[] out;
-        int matches = 0;
-        String names;
+        String names = "";
         for(int i =0 ; i<movies.length;i++){
-            for(String name : movies[i].getCast()){
-
+            for(String n : movies[i].getCast()){
+                String name = n.toLowerCase();
+                if(!names.contains(n.replace(' ',','))&&name.contains(keyWord)){
+                    names+=n.replace(' ',',')+" ";
+                }
             }
+        }
+        out = names.split(" ");
+        Movie.insertionStringArrSort(out);
+        return out;
+    }
+    public Movie[] actorMovies(String name){
+        Movie[] out;
+        int matches = 0;
+        String indices = "";
+        for(int i =0; i<movies.length;i++){
+            for(String actor : movies[i].getCast()){
+                if(actor.equals(name)){
+                    indices+=i+" ";
+                    matches++;
+                    break;
+                }
+            }
+        }
+        out = new Movie[matches];
+        String[] indices0 = indices.split(" ");
+        for(int i = 0; i<matches;i++){
+            out[i] = movies[Integer.parseInt(indices0[i])];
         }
         return out;
     }
