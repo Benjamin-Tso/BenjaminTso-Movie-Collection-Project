@@ -30,11 +30,11 @@ public class MovieCollection {
         keyWord = keyWord.toLowerCase();
         String[] out;
         String names = "";
-        for(int i =0 ; i<movies.length;i++){
-            for(String n : movies[i].getCast()){
+        for (Movie movie : movies) {
+            for (String n : movie.getCast()) {
                 String name = n.toLowerCase();
-                if(!names.contains(n.replaceAll(" ",",")+"|")&&name.contains(keyWord)){
-                    names+=n.replaceAll(" ",",")+"|";
+                if (!names.contains(n.replaceAll(" ", ",") + "|") && name.contains(keyWord)) {
+                    names += n.replaceAll(" ", ",") + "|";
                 }
             }
         }
