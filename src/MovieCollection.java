@@ -33,12 +33,16 @@ public class MovieCollection {
         for(int i =0 ; i<movies.length;i++){
             for(String n : movies[i].getCast()){
                 String name = n.toLowerCase();
-                if(!names.contains(n.replace(' ',','))&&name.contains(keyWord)){
-                    names+=n.replace(' ',',')+" ";
+                if(!names.contains(n.replaceAll(" ",","))&&name.contains(keyWord)){
+                    names+=n.replaceAll(" ",",")+"|";
                 }
             }
         }
-        out = names.split(" ");
+        if(names.length()==0){
+            return null;
+        }
+        out = names.trim().split("\\|");
+        System.out.println(names);
         Movie.insertionStringArrSort(out);
         return out;
     }
@@ -56,7 +60,7 @@ public class MovieCollection {
             }
         }
         out = new Movie[matches];
-        String[] indices0 = indices.split(" ");
+        String[] indices0 = indices.trim().split(" ");
         for(int i = 0; i<matches;i++){
             out[i] = movies[Integer.parseInt(indices0[i])];
         }

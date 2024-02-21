@@ -75,12 +75,13 @@ public class MovieCollectionRunner {
                     System.out.println("Directed By: "+choice.getDirector());
                     System.out.println("Cast: "+ Arrays.toString(choice.getCast()).replaceAll("\\|",",").substring(1).replace("]",""));
                     System.out.println("User Rating: " + choice.getUserRating());
+                    System.out.println("Overview: " + choice.getOverview());
                     System.out.println();
                 }
             } else if (menuOption.equals("c")) {
                 System.out.print("Name: ");
                 String[] searchedCast =  collection.searchCast(readUserInput.nextLine());
-                if(searchedCast.length==0){
+                if(searchedCast==null){
                     System.out.println("no matches");
                 }
                 else{
@@ -101,7 +102,7 @@ public class MovieCollectionRunner {
                             System.out.println("invalid");
                         }
                     }
-                    Movie[] actorMovies = collection.actorMovies(searchedCast[actorNum-1].replace(',',' '));
+                    Movie[] actorMovies = collection.actorMovies(searchedCast[actorNum-1].replaceAll(","," "));
                     String[] titles = new String[actorMovies.length];
                     for(int i = 0; i<titles.length;i++){
                         titles[i] = actorMovies[i].getTitle();
@@ -136,6 +137,7 @@ public class MovieCollectionRunner {
                     System.out.println("Directed By: "+choice.getDirector());
                     System.out.println("Cast: "+ Arrays.toString(choice.getCast()).replaceAll("\\|",",").substring(1).replace("]",""));
                     System.out.println("User Rating: " + choice.getUserRating());
+                    System.out.println("Overview: " + choice.getOverview());
                     System.out.println();
                 }
             } else if (menuOption.equals("q")) {
